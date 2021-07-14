@@ -27,29 +27,8 @@ class User {
 const users = require('./names.json');
 
 console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+
 class Parser {
-
-   // // return an array of values that match on a certain key
-   // getValues(users, key) {
-
-   //    // create empty array 
-   //    var names = [];
-
-   //    // for each variable in json
-   //    for (var i in users) {
-
-   //       // if object is object 
-   //       if (typeof users[i] == 'object') {
-   //          // set array to object array in json 
-   //          objects = objects.concat(getValues(obj[i], key));
-   //       }
-   //       // else if the object is last name searched 
-   //       else if (i == key) {
-   //          objects.push(obj[i]);
-   //       }
-   //    }
-   //    return objects;
-   // }
 
    // parse method
    parse(incomingEmail) {
@@ -63,6 +42,9 @@ class Parser {
    }
 
    emailBodySearch(wordArray) {
+
+      foundPeopleArray = [];
+      
       // for each word in email, search
       // if current "for each" loop is true (i.e. database does contain user)
       for (let i = 1; i < wordArray.length; i++) {
@@ -77,6 +59,8 @@ class Parser {
             // if first/last name is in database 
             if (users[i - 1].lastName.toLowerCase() == wordArray[i-1].toLowerCase()) {
 
+               // then in last, first format 
+               let foundPeopleArray = users[]
             }
          }
       }
@@ -84,6 +68,15 @@ class Parser {
 
    // search for first name 
    searchDatabaseFirst(firstNameFind) {
+      for (let people = 1; people < users.length; people++) {
+         if (users[people].firstName.toLowerCase() === firstNameFind.toLowerCase()) {
+            return true;
+         }
+      }
+      return false;
+   }
+
+   searchDatabaseFirstIndex(firstNameFind) {
       for (let people = 1; people < users.length; people++) {
          if (users[people].firstName.toLowerCase() === firstNameFind.toLowerCase()) {
             return true;
