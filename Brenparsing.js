@@ -26,6 +26,14 @@ const usersJS = require('./names.json');
 foundPeopleArray = [];
 users = [];
 
+function alreadyExist(user) {
+   for (let key in foundPeopleArray) {
+      if (foundPeopleArray[key] === user) {
+         return true; 
+      }
+   }
+   return false; 
+}
 
 function javascriptArrayAdapting() {
    // for loop creating user objects 
@@ -54,7 +62,7 @@ function searchDatabaseFirst(firstNameFind) {
 // takes last name to be searched for 
 function searchDatabaseLast(lastNameFind) {
    // for each person in array
-   for (let people = 1; people < users.length; people++) {
+   for (let people = 0; people < users.length; people++) {
       // if current person's last name matches last name to be found 
       if (users[people].lastName.toLowerCase() === lastNameFind.toLowerCase()) {
          // return true 
@@ -70,7 +78,7 @@ function searchDatabaseLast(lastNameFind) {
 function searchDatabase(firstNameFind, lastNameFind) {
 
    // for each person in array 
-   for (let people = 1; people < users.length; people++) {
+   for (let people = 0; people < users.length; people++) {
       for (let firstNameIndex = 0; firstNameIndex < users[people].firstName.length; firstNameIndex++) {
 
          // if first and last name match index' first and last name 
@@ -95,7 +103,9 @@ function searchDatabaseIndex(firstNameFind, lastNameFind) {
          if (users[people].firstName[firstNameIndex].toLowerCase() === firstNameFind.toLowerCase() && users[people].lastName.toLowerCase() === lastNameFind.toLowerCase()) {
 
             // return true 
-            return users[people];
+            if (!alreadyExist(users[people])) {
+               foundPeopleArray.push(users[people]);
+            }
          }
       }
    }
@@ -117,15 +127,19 @@ function emailBodySearch(wordArray) {
          currentSearch = false;
 
          // if first/last or last/first name is in database 
-         if (searchDatabase(wordArray[i], wordArray[i - 1])) {
-            foundPeopleArray.push(searchDatabaseIndex(wordArray[i], wordArray[i - 1]));
-            // then in last, first format 
+         if (searchDatabase(wordArray[i], wordArray[i - 1])) {        
+            searchDatabaseIndex(wordArray[i], wordArray[i - 1]);
+            // then in last, first format               
 
+         }
+
+         if (searchDatabase(wordArray[i + 1], wordArray[i])) {
+            searchDatabaseIndex(wordArray[i + 1], wordArray[i]); 
          }
          // if database has object with names in this order
          if (searchDatabase(wordArray[i - 1], wordArray[i])) {
             // append found user to end of foundPeopleArray
-            foundPeopleArray.push(searchDatabaseIndex(wordArray[i - 1], wordArray[i]));
+            searchDatabaseIndex(wordArray[i - 1], wordArray[i]);
          }
       }
    }
@@ -146,4 +160,4 @@ console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
 parse("hi alex matthews i just noticed that we have like people named andrew cox could you let them all know that we want to have an andrew cox convention i thought we could get them all together and have them compete to see who s the best one of them always signs their name like this cox drew at the end of their emails and it always grinds my gears i hope he loses anyways thanks bill");
 
 
-console.log(foundPeopleArray[0]);
+console.log(foundPeopleArray);
