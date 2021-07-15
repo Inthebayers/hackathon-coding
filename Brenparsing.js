@@ -76,7 +76,9 @@ function searchDatabaseLast(lastNameFind) {
 
 // search full name with first and last name 
 function searchDatabase(firstNameFind, lastNameFind) {
-
+   if (firstNameFind === undefined || lastNameFind === undefined) {
+      return false; 
+   }
    // for each person in array 
    for (let people = 0; people < users.length; people++) {
       for (let firstNameIndex = 0; firstNameIndex < users[people].firstName.length; firstNameIndex++) {
@@ -117,7 +119,7 @@ function emailBodySearch(wordArray) {
 
    // for each word in email, search
    // if current "for each" loop is true (i.e. database does contain user)
-   for (let i = 1; i < wordArray.length; i++) {
+   for (let i = 0; i < wordArray.length; i++) {
 
       // search database for word left and right of found word
       // if current array index is in database 
@@ -141,6 +143,12 @@ function emailBodySearch(wordArray) {
             // append found user to end of foundPeopleArray
             searchDatabaseIndex(wordArray[i - 1], wordArray[i]);
          }
+
+         if (searchDatabase(wordArray[i], wordArray[i + 1])) {
+            searchDatabaseIndex(wordArray[i], wordArray[i + 1]);
+            // then in last, first format               
+
+         }
       }
    }
 }
@@ -157,7 +165,7 @@ function parse(incomingEmail) {
 
 javascriptArrayAdapting();
 console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-parse("hi alex matthews i just noticed that we have like people named andrew cox could you let them all know that we want to have an andrew cox convention i thought we could get them all together and have them compete to see who s the best one of them always signs their name like this cox drew at the end of their emails and it always grinds my gears i hope he loses anyways thanks bill");
+parse("hi jessica i was talking to viv tracy the other day about their work on the project she said that tracy gwen was also working on it i wasn t aware of this and wanted to touch base with you to make sure that everything s going well since she s on your team also please wish keith a happy birthday for me thanks ronald mcdonald");
 
 
 console.log(foundPeopleArray);
