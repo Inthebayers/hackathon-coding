@@ -15,11 +15,12 @@
  */
 class User {
 
-   constructor(firstName, lastName, number, eMail) {
+   constructor(firstName, lastName, preferred_name, eMail, pronouns) {
       this.firstName = firstName;
       this.lastName = lastName;
-      this.number = number;
+      this.preferred_name = preferred_name;
       this.email = eMail;
+      this.pronouns = pronouns;
    }
 
 }
