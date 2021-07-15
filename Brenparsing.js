@@ -156,16 +156,13 @@ function emailBodySearch(wordArray) {
 // parse method
 function parse(incomingEmail) {
 
+   javascriptArrayAdapting();
+
    //parse string of incoming words forming email body into "tokens"
    wordArray = incomingEmail.split(" ");
 
    emailBodySearch(wordArray);
+   
+   return foundPeopleArray; 
 
 }
-
-javascriptArrayAdapting();
-console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-parse("hi jessica i was talking to viv tracy the other day about their work on the project she said that tracy gwen was also working on it i wasn t aware of this and wanted to touch base with you to make sure that everything s going well since she s on your team also please wish keith a happy birthday for me thanks ronald mcdonald");
-
-
-console.log(foundPeopleArray);
